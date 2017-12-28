@@ -33,20 +33,23 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     func setupScrollView(){
         scrollView.contentSize = CGSize(width: self.view.frame.size.width * 6, height: self.scrollView.frame.size.height)
         
-        scrollView.isPagingEnabled = true
-        
         for i in 0...5 {
             let label = UILabel()
             label.text = "Page \(i)"
             label.font = UIFont.systemFont(ofSize: 25, weight: UIFont.Weight.heavy)
             label.sizeToFit()
-            label.center.y = scrollView.center.y
+            label.center.y = scrollView.bounds.size.height / 2
             label.center.x = view.frame.size.width * CGFloat(i) + view.center.x
-            view.addSubview(label)
+            scrollView.addSubview(label)
         }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        var progress = scrollView.contentOffset.x / (scrollView.contentSize.width - self.view.frame.size.width)
+//        if progress > 1 {
+//            progress = 1
+//        }
+    
         let progress = scrollView.contentOffset.x / scrollView.contentSize.width
         animationView.animationProgress = progress
     }
